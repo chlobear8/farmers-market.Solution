@@ -1,5 +1,6 @@
 import React from "react";
 import SeasonalProduce from "./SeasonalProduce";
+import PropTypes from "prop-types";
 
 const availableProduce = [  
    {  
@@ -270,3 +271,20 @@ const availableProduce = [
    }
 ];
 
+function SeasonalProduceList(props){
+   return (
+      <React.Fragment>
+         {availableProduce.filter(month => month.month === props.inputMonth).map((month, index) =>
+            <SeasonalProduce month={month.month}
+               selection={month.selection}
+               key={index}/>
+         )}
+      </React.Fragment>
+   );
+}
+
+SeasonalProduceList.propTypes = {
+   inputMonth: PropTypes.string
+};
+
+export default SeasonalProduceList;
