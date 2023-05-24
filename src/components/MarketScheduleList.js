@@ -1,5 +1,7 @@
 import React from "react";
 import MarketSchedule from "./MarketSchedule";
+import PropTypes from "prop-types";
+
 
 const marketScheduleData = [  
   {  
@@ -41,19 +43,25 @@ const marketScheduleData = [
  ];
 
 
-
- function MarketList(){
+//MarketScheduleList("Day")
+//MarketScheduleData => get schedule that matches the day
+//Call <MarketSchedule > for that day
+ function MarketScheduleList(props){
   return (
     <React.Fragment>
-      {marketScheduleData.map((schedule, index) =>
+      {marketScheduleData.filter(schedule => schedule.day === props.inputDay).map((schedule, index) =>
          <MarketSchedule day={schedule.day}
-         location={schedule.location}
-         hours={schedule.hours}
-         booth={schedule.booth}
-         key={index}/>
-        )}
+            location={schedule.location}
+            hours={schedule.hours}
+            booth={schedule.booth}
+            key={index}/>
+     )}
     </React.Fragment>
   );
  }
 
- export default MarketList;
+ MarketScheduleList.propTypes = {
+   inputDay: PropTypes.string
+ };
+
+ export default MarketScheduleList;
